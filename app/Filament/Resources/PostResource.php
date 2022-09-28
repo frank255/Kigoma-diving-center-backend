@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
+use App\Filament\Resources\PostResource\Widgets\PostOverview;
+use App\Filament\Resources\PostResource\Widgets\StatsOverview;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -98,7 +100,7 @@ class PostResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            Widgets\PostOverview::class,
+            StatsOverview::class,
         ];
     }
 

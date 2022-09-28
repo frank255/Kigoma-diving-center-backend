@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\PostResource\Pages;
 
 use App\Filament\Resources\PostResource;
+use App\Filament\Resources\PostResource\Widgets\PostOverview;
+use App\Filament\Resources\PostResource\Widgets\StatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -22,7 +24,7 @@ class ListPosts extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            PostResource\Widgets\PostOverview::class,
+            StatsOverview::class,
         ];
     }
 }
