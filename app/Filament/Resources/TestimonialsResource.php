@@ -13,6 +13,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class TestimonialsResource extends Resource
 {
@@ -34,6 +36,7 @@ class TestimonialsResource extends Resource
                     Forms\Components\RichEditor::make('comment')
                         ->required()
                         ->maxLength(65535),
+                    SpatieMediaLibraryFileUpload::make('avatar')->collection('testimonials'),
                     Forms\Components\Toggle::make('is_published')
                         ->required(),
 
@@ -48,6 +51,7 @@ class TestimonialsResource extends Resource
                 Tables\Columns\TextColumn::make('fullname'),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('comment'),
+                SpatieMediaLibraryImageColumn::make('avatar')->collection('testimonials'),
                 Tables\Columns\BooleanColumn::make('is_published'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
