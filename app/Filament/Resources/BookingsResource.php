@@ -5,13 +5,17 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BookingsResource\Pages;
 use App\Filament\Resources\BookingsResource\RelationManagers;
 use App\Models\Bookings;
+use App\Models\Services;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
+
 
 class BookingsResource extends Resource
 {
@@ -25,7 +29,8 @@ class BookingsResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('booking_reference')
                     ->required()
-                    ->maxLength(255),
+                    ->default(Str::random(6))
+                    ->disabled(),
                 Forms\Components\TextInput::make('fullname')
                     ->required()
                     ->maxLength(255),
@@ -36,9 +41,13 @@ class BookingsResource extends Resource
                 Forms\Components\TextInput::make('whatsapp')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('services')
+                Select::make('services')
+                    ->options(Services::all()->pluck('name', 'id'))
+                    ->searchable()
+                    ->multiple()
                     ->required()
-                    ->maxLength(65535),
+                    ->disablePlaceholderSelection(),
+
                 Forms\Components\DatePicker::make('start')
                     ->required(),
                 Forms\Components\DatePicker::make('end')
@@ -78,14 +87,14 @@ class BookingsResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -93,5 +102,5 @@ class BookingsResource extends Resource
             'create' => Pages\CreateBookings::route('/create'),
             'edit' => Pages\EditBookings::route('/{record}/edit'),
         ];
-    }    
+    }
 }

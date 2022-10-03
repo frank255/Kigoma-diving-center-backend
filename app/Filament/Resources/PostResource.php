@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\Filter;
@@ -40,7 +41,7 @@ class PostResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    BelongsToSelect::make('category_id')
+                    Select::make('category_id')
                         ->relationship('category', 'name')->required(),
                     TextInput::make('title')
                         ->reactive()
@@ -50,7 +51,7 @@ class PostResource extends Resource
                     TextInput::make('slug')
                         ->required()
                         ->maxLength(255),
-                    SpatieMediaLibraryFileUpload::make('thumbnail')->collection('posts'),
+                    SpatieMediaLibraryFileUpload::make('image')->collection('posts'),
                     RichEditor::make('content')
                         ->required()
                         ->maxLength(65535),
@@ -69,7 +70,7 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('slug')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\BooleanColumn::make('is_published'),
-                SpatieMediaLibraryImageColumn::make('thumbnail')->collection('posts'),
+                SpatieMediaLibraryImageColumn::make('image')->collection('posts'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

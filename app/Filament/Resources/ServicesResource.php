@@ -10,6 +10,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,8 +25,6 @@ class ServicesResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('costs_id')
-                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -34,6 +34,8 @@ class ServicesResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->maxLength(255),
+                SpatieMediaLibraryFileUpload::make('image')->collection('services'),
+
             ]);
     }
 
@@ -41,8 +43,8 @@ class ServicesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('costs_id'),
                 Tables\Columns\TextColumn::make('name'),
+                SpatieMediaLibraryImageColumn::make('image')->collection('services'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('price'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -60,14 +62,14 @@ class ServicesResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -75,5 +77,5 @@ class ServicesResource extends Resource
             'create' => Pages\CreateServices::route('/create'),
             'edit' => Pages\EditServices::route('/{record}/edit'),
         ];
-    }    
+    }
 }
