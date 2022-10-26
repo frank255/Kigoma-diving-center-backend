@@ -17,7 +17,7 @@ class TeamResource extends Resource
 {
     protected static ?string $model = Team::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
     public static function form(Form $form): Form
     {
@@ -66,14 +66,14 @@ class TeamResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -81,5 +81,5 @@ class TeamResource extends Resource
             'create' => Pages\CreateTeam::route('/create'),
             'edit' => Pages\EditTeam::route('/{record}/edit'),
         ];
-    }    
+    }
 }

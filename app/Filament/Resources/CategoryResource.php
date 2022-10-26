@@ -22,7 +22,7 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-tag';
 
     public static function form(Form $form): Form
     {

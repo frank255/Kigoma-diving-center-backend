@@ -13,14 +13,12 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class TestimonialsResource extends Resource
 {
     protected static ?string $model = Testimonials::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-chat';
 
     public static function form(Form $form): Form
     {
@@ -31,12 +29,10 @@ class TestimonialsResource extends Resource
                         ->required()
                         ->maxLength(255),
                     Forms\Components\TextInput::make('title')
-                        ->required()
                         ->maxLength(255),
-                    Forms\Components\RichEditor::make('comment')
+                    Forms\Components\TextInput::make('comment')
                         ->required()
                         ->maxLength(65535),
-                    SpatieMediaLibraryFileUpload::make('avatar')->collection('testimonials'),
                     Forms\Components\Toggle::make('is_published')
                         ->required(),
 
@@ -51,7 +47,6 @@ class TestimonialsResource extends Resource
                 Tables\Columns\TextColumn::make('fullname'),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('comment'),
-                SpatieMediaLibraryImageColumn::make('avatar')->collection('testimonials'),
                 Tables\Columns\BooleanColumn::make('is_published'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
