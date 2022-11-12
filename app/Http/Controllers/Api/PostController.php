@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\mediaarray;
 
 class PostController extends Controller
 {
@@ -17,10 +18,9 @@ class PostController extends Controller
     {
 
         $posts = Post::query()->with('media')->latest()->get();
-        return response()->json([
-            'status' => true,
-            'posts' => [$posts],
-        ]);
+        return response()->json(
+            $posts
+        );
     }
 
     /**
@@ -50,9 +50,12 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        $post = Post::query()->with('media')->find($id);
+        return response()->json(
+            $post
+        );
     }
 
     /**

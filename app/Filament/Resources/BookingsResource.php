@@ -43,7 +43,7 @@ class BookingsResource extends Resource
                     ->maxLength(255),
                 Select::make('services')
                     ->options(Services::all()->pluck('name', 'id'))
-                    ->searchable()
+                    ->preload()
                     ->multiple()
                     ->required()
                     ->disablePlaceholderSelection(),

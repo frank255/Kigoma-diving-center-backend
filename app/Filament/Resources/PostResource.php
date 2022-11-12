@@ -11,9 +11,14 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Closure;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Str;
+use Filament\Forms\Components\Card;
+
 
 class PostResource extends Resource
 {
@@ -25,20 +30,26 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('category_id')
-                    ->required(),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                FileUpload::make(name: 'image')->avatar(),
-                Forms\Components\Textarea::make('content')
-                    ->required()
-                    ->maxLength(65535),
-                Forms\Components\Toggle::make('is_published')
-                    ->required(),
+                Card::make()
+                    ->schema([
+                        Select::make('category_id')
+                            ->relationship('category', 'name')
+                            ->preload()
+                            ->required(),
+                        TextInput::make('title')
+                            ->reactive()
+                            ->afterStateUpdated(function (Closure $set, $state) {
+                                $set('slug', Str::slug($state));
+                            })->required(),
+                        TextInput::make('slug'),
+                        SpatieMediaLibraryFileUpload::make('image')->image()->multiple()->minFiles(3),
+                        Forms\Components\Textarea::make('content')
+                            ->required()
+                            ->maxLength(65535),
+                        Forms\Components\Toggle::make('is_published')
+                            ->required(),
+                    ])
+
             ]);
     }
 
@@ -46,10 +57,10 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category_id'),
+                Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('slug'),
-                ImageColumn::make('image')->rounded(),
+                SpatieMediaLibraryImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('content'),
                 Tables\Columns\BooleanColumn::make('is_published'),
                 Tables\Columns\TextColumn::make('created_at')
