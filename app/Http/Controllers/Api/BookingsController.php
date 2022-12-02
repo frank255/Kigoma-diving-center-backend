@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Bookings;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBookingRequest;
+use App\Http\Resources\BookingsResource;
 
 class BookingsController extends Controller
 {
@@ -15,7 +17,7 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        //
+        return BookingsResource::collection(Bookings::paginate(5));
     }
 
     /**
@@ -36,7 +38,7 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Bookings::create($request->all());
     }
 
     /**

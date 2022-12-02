@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingsResource\Pages;
@@ -16,7 +17,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
-
 class BookingsResource extends Resource
 {
     protected static ?string $model = Bookings::class;
@@ -27,33 +27,32 @@ class BookingsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('booking_reference')
-                    ->required()
-                    ->default(Str::random(6))
-                    ->disabled(),
                 Forms\Components\TextInput::make('fullname')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('nationality')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('whatsapp')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('no_people')
+                    ->required(),
+                Forms\Components\TextInput::make('no_children'),
+                Forms\Components\Textarea::make('allergies')
+                    ->maxLength(65535),
                 Select::make('services')
                     ->options(Services::all()->pluck('name', 'id'))
                     ->preload()
                     ->multiple()
                     ->required()
                     ->disablePlaceholderSelection(),
-
                 Forms\Components\DatePicker::make('start')
                     ->required(),
                 Forms\Components\DatePicker::make('end')
                     ->required(),
-                Forms\Components\TextInput::make('total_cost')
-                    ->required()
+                Forms\Components\TextInput::make('info')
                     ->maxLength(255),
             ]);
     }
@@ -64,14 +63,17 @@ class BookingsResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('booking_reference'),
                 Tables\Columns\TextColumn::make('fullname'),
+                Tables\Columns\TextColumn::make('nationality'),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('whatsapp'),
+                Tables\Columns\TextColumn::make('no_people'),
+                Tables\Columns\TextColumn::make('no_children'),
+                Tables\Columns\TextColumn::make('allergies'),
                 Tables\Columns\TextColumn::make('services'),
                 Tables\Columns\TextColumn::make('start')
                     ->date(),
                 Tables\Columns\TextColumn::make('end')
                     ->date(),
-                Tables\Columns\TextColumn::make('total_cost'),
+                Tables\Columns\TextColumn::make('info'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

@@ -15,11 +15,10 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $services = Services::all();
-        return response()->json([
-            'status' => true,
-            'posts' => [$services],
-        ]);
+        $services = Services::with('media')->get();
+        return response()->json(
+            $services
+        );
     }
 
     /**

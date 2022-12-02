@@ -28,13 +28,12 @@ class ServicesResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\TextArea::make('description')
+                    ->required(),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->maxLength(255),
-                SpatieMediaLibraryFileUpload::make('image')->collection('services'),
+                SpatieMediaLibraryFileUpload::make('image')->collection('services')->image()->multiple()->minFiles(3),
 
             ]);
     }

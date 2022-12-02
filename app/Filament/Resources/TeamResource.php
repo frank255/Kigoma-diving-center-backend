@@ -12,6 +12,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class TeamResource extends Resource
 {
@@ -23,6 +25,7 @@ class TeamResource extends Resource
     {
         return $form
             ->schema([
+                SpatieMediaLibraryFileUpload::make('image')->image()->avatar(),
                 Forms\Components\TextInput::make('fullname')
                     ->required()
                     ->maxLength(255),
@@ -35,8 +38,12 @@ class TeamResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp')
                     ->required()
+                    ->placeholder(' example:255766....')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('twitter')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('instagram')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -46,11 +53,13 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('image')->rounded(),
                 Tables\Columns\TextColumn::make('fullname'),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('whatsapp'),
                 Tables\Columns\TextColumn::make('twitter'),
+                Tables\Columns\TextColumn::make('instagram'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

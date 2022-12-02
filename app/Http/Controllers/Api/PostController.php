@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::query()->with('media')->latest()->get();
+        $posts = Post::with('media')->latest()->get();
         return response()->json(
             $posts
         );

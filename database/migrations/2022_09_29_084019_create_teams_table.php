@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('whatsapp');
             $table->string('twitter');
+            $table->string('instagram');
             $table->timestamps();
         });
     }

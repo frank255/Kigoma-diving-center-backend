@@ -15,11 +15,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $team = Team::all();
-        return response()->json([
-            'status' => true,
-            'posts' => [$team],
-        ]);
+        $team = Team::query()->with('media')->latest()->get();
+        return response()->json(
+            $team
+        );
     }
 
     /**

@@ -15,14 +15,17 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('booking_reference')->unique();
+            $table->char('booking_reference')->unique();
             $table->string('fullname');
+            $table->string('nationality');
             $table->string('email');
-            $table->string('whatsapp');
+            $table->integer('no_people');
+            $table->integer('no_children')->nullable();
+            $table->text('allergies')->nullable();
             $table->text('services');
             $table->date('start');
             $table->date('end');
-            $table->string('total_cost');
+            $table->string('info')->nullable();
             $table->timestamps();
         });
     }
