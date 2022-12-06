@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ServicesController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TestimonialsController;
+use App\Http\Controllers\Api\SubscribersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,4 @@ Route::apiResource('bookings', BookingsController::class);
 Route::apiResource('services', ServicesController::class);
 Route::apiResource('team', TeamController::class);
 Route::apiResource('testimonials', TestimonialsController::class);
+Route::apiResource('subscribers', SubscribersController::class);

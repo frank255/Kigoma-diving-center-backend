@@ -61,8 +61,9 @@ class BookingsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('booking_reference'),
-                Tables\Columns\TextColumn::make('fullname'),
+                Tables\Columns\TextColumn::make('id')->sortable(),
+                Tables\Columns\TextColumn::make('booking_reference')->searchable(),
+                Tables\Columns\TextColumn::make('fullname')->searchable(),
                 Tables\Columns\TextColumn::make('nationality'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('no_people'),

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Testimonials extends Model implements HasMedia
+class Testimonial extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia;
+    use HasFactory, InteractsWithMedia;
     protected $fillable = ['fullname', 'title', 'comment', 'is_published'];
     protected $casts = [
         'is_published' => 'boolean',

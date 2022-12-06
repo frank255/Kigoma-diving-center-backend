@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Bookings;
 use App\Models\Post;
+use App\Models\Subscribers;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 
@@ -20,9 +21,9 @@ class StatsOverview extends BaseWidget
                 ->description('Total number of bookings')
                 ->descriptionIcon('heroicon-s-calendar')
                 ->color('success'),
-            Card::make('Visitors', '12k')
-                ->description('Total number of visitors')
-                ->descriptionIcon('heroicon-s-users')
+            Card::make('Subscribers', Subscribers::all()->count())
+                ->description('Total number of subscribers')
+                ->descriptionIcon('heroicon-s-user-group')
                 ->color('success'),
         ];
     }

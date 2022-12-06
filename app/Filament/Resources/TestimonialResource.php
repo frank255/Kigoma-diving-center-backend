@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TestimonialsResource\Pages;
-use App\Filament\Resources\TestimonialsResource\RelationManagers;
-use App\Models\Testimonials;
+use App\Filament\Resources\TestimonialResource\Pages;
+use App\Filament\Resources\TestimonialResource\RelationManagers;
+use App\Models\Testimonial;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -14,29 +13,26 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TestimonialsResource extends Resource
+class TestimonialResource extends Resource
 {
-    protected static ?string $model = Testimonials::class;
+    protected static ?string $model = Testimonial::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-chat';
+    protected static ?string $navigationIcon = 'heroicon-o-chat';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Card::make()->schema([
-                    Forms\Components\TextInput::make('fullname')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('title')
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('comment')
-                        ->required()
-                        ->maxLength(65535),
-                    Forms\Components\Toggle::make('is_published')
-                        ->required(),
-
-                ])
+                Forms\Components\TextInput::make('fullname')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('title')
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('comment')
+                    ->required()
+                    ->maxLength(65535),
+                Forms\Components\Toggle::make('is_published')
+                    ->required(),
             ]);
     }
 
@@ -47,7 +43,8 @@ class TestimonialsResource extends Resource
                 Tables\Columns\TextColumn::make('fullname'),
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('comment'),
-                Tables\Columns\BooleanColumn::make('is_published'),
+                Tables\Columns\IconColumn::make('is_published')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -75,8 +72,8 @@ class TestimonialsResource extends Resource
     {
         return [
             'index' => Pages\ListTestimonials::route('/'),
-            'create' => Pages\CreateTestimonials::route('/create'),
-            'edit' => Pages\EditTestimonials::route('/{record}/edit'),
+            'create' => Pages\CreateTestimonial::route('/create'),
+            'edit' => Pages\EditTestimonial::route('/{record}/edit'),
         ];
     }
 }
