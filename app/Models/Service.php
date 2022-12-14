@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Services extends Model implements HasMedia
+class Service extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
     protected $fillable = ['name', 'description', 'price'];
@@ -17,7 +17,7 @@ class Services extends Model implements HasMedia
 
     public function Bookings()
     {
-        return $this->belongsToMany(Bookings::class);
+        return $this->belongsToMany(Booking::class);
     }
     protected $casts = [
         'attachments' => 'array',

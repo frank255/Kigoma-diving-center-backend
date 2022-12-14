@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Services;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
-class ServicesController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $services = Services::with('media')->get();
+        $services = Service::with('media')->get();
         return response()->json(
             $services
         );
@@ -48,7 +48,7 @@ class ServicesController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function show(Services $services)
+    public function show(Service $services)
     {
         //
     }
@@ -59,7 +59,7 @@ class ServicesController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function edit(Services $services)
+    public function edit(Service $services)
     {
         //
     }
@@ -71,7 +71,7 @@ class ServicesController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Services $services)
+    public function update(Request $request, Service $services)
     {
         //
     }
@@ -82,7 +82,7 @@ class ServicesController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Services $services)
+    public function destroy(Service $services)
     {
         //
     }

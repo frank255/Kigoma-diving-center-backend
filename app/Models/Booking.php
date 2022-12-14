@@ -9,14 +9,11 @@ use Illuminate\Support\Str;
 class Booking extends Model
 {
     use HasFactory;
-    public $incrementing = false;
-
-
     protected $fillable = ['booking_reference', 'fullname', 'nationality', 'email', 'no_people', 'no_children', 'allergies', 'services', 'start', 'end', 'info'];
 
     public function Service()
     {
-        return $this->belongsToMany(Services::class);
+        return $this->belongsToMany(Service::class);
     }
     protected $casts = [
         'services' => 'array',

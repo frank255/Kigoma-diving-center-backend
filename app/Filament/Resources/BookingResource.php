@@ -1,27 +1,25 @@
 <?php
 
-
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookingsResource\Pages;
-use App\Filament\Resources\BookingsResource\RelationManagers;
-use App\Models\Bookings;
-use App\Models\Services;
+use App\Filament\Resources\BookingResource\Pages;
+use App\Filament\Resources\BookingResource\RelationManagers;
+use App\Models\Booking;
+use App\Models\Service;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
 
-class BookingsResource extends Resource
+class BookingResource extends Resource
 {
-    protected static ?string $model = Bookings::class;
+    protected static ?string $model = Booking::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-calendar';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Form $form): Form
     {
@@ -43,7 +41,7 @@ class BookingsResource extends Resource
                 Forms\Components\Textarea::make('allergies')
                     ->maxLength(65535),
                 Select::make('services')
-                    ->options(Services::all()->pluck('name', 'id'))
+                    ->options(Service::all()->pluck('name', 'id'))
                     ->preload()
                     ->multiple()
                     ->required()
@@ -62,7 +60,7 @@ class BookingsResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('booking_reference')->searchable(),
+                Tables\Columns\TextColumn::make('booking_reference')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('fullname')->searchable(),
                 Tables\Columns\TextColumn::make('nationality'),
                 Tables\Columns\TextColumn::make('email'),
@@ -102,8 +100,8 @@ class BookingsResource extends Resource
     {
         return [
             'index' => Pages\ListBookings::route('/'),
-            'create' => Pages\CreateBookings::route('/create'),
-            'edit' => Pages\EditBookings::route('/{record}/edit'),
+            'create' => Pages\CreateBooking::route('/create'),
+            'edit' => Pages\EditBooking::route('/{record}/edit'),
         ];
     }
 }

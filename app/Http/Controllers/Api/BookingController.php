@@ -7,6 +7,7 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Resources\BookingResource;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class BookingController extends Controller
 {
@@ -74,9 +75,11 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request, $id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->update($request->all());
+        return $booking;
     }
 
     /**
@@ -85,8 +88,14 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
-        //
+     return Booking ::destroy($id);
+    }
+
+    public function search($booking_reference)
+    {
+        $booking = Booking::where('booking_reference', $booking_reference)->get();
+        return response()->json($booking);
     }
 }

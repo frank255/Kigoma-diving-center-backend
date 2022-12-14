@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\PostCreated;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,11 @@ class Post extends Model implements HasMedia
         'is_published' => 'boolean',
         'attachments' => 'array',
     ];
+    // protected static function booted()
+    // {
+    //    $subscriber = Subscriber::first();
+    //    $subscriber->notify(new PostCreated($post));
+    // }
     public function category()
     {
         return $this->belongsTo(Category::class);

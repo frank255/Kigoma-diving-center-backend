@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Testimonials;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\Cloner\Data;
 
-class TestimonialsController extends Controller
+class TestimonialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class TestimonialsController extends Controller
      */
     public function index()
     {
-        $testimonials = Testimonials::all();
+        $testimonials = Testimonial::all();
         return response()->json(
             $testimonials
         );
@@ -46,10 +46,10 @@ class TestimonialsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Testimonials  $testimonials
+     * @param  \App\Models\Testimonial  $testimonials
      * @return \Illuminate\Http\Response
      */
-    public function show(Testimonials $testimonials)
+    public function show(Testimonial $testimonials)
     {
         //
     }
@@ -57,10 +57,10 @@ class TestimonialsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Testimonials  $testimonials
+     * @param  \App\Models\Testimonial  $testimonials
      * @return \Illuminate\Http\Response
      */
-    public function edit(Testimonials $testimonials)
+    public function edit(Testimonial $testimonials)
     {
         //
     }
@@ -69,10 +69,10 @@ class TestimonialsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Testimonials  $testimonials
+     * @param  \App\Models\Testimonial  $testimonials
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Testimonials $testimonials)
+    public function update(Request $request, Testimonial $testimonials)
     {
         //
     }
@@ -80,10 +80,10 @@ class TestimonialsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Testimonials  $testimonials
+     * @param  \App\Models\Testimonial  $testimonials
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Testimonials $testimonials)
+    public function destroy(Testimonial $testimonials)
     {
         //
     }

@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\BookingsController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\PostController;
-use App\Http\Controllers\Api\ServicesController;
+use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\TeamController;
-use App\Http\Controllers\Api\TestimonialsController;
-use App\Http\Controllers\Api\SubscribersController;
+use App\Http\Controllers\Api\TestimonialController;
+use App\Http\Controllers\Api\SubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::apiResource('posts', PostController::class);
-Route::apiResource('bookings', BookingsController::class);
-Route::apiResource('services', ServicesController::class);
+Route::apiResource('bookings', BookingController::class);
+Route::apiResource('services', ServiceController::class);
 Route::apiResource('team', TeamController::class);
-Route::apiResource('testimonials', TestimonialsController::class);
-Route::apiResource('subscribers', SubscribersController::class);
+Route::apiResource('testimonials', TestimonialController::class);
+Route::apiResource('subscribers', SubscriberController::class);
+Route::get('search/{booking_reference}',[BookingController::class,'search']);
