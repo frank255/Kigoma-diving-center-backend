@@ -4,15 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers;
+use Filament\Forms\Components\Select;
 use App\Models\Booking;
-use App\Models\Service;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BookingResource extends Resource
@@ -59,9 +59,8 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('booking_reference')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('fullname')->searchable(),
+                Tables\Columns\TextColumn::make('booking_reference'),
+                Tables\Columns\TextColumn::make('fullname'),
                 Tables\Columns\TextColumn::make('nationality'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('no_people'),

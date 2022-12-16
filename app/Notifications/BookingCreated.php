@@ -2,24 +2,24 @@
 
 namespace App\Notifications;
 
-use App\Models\Post;
+use App\Models\Booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostCreated extends Notification
+class BookingCreated extends Notification
 {
     use Queueable;
-    private Post $post;
+    private Booking $booking;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Post $post)
+    public function __construct(Booking $booking)
     {
-        $this->post = $post;
+        $this->booking = $booking;
     }
 
     /**
@@ -41,14 +41,12 @@ class PostCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        // $url = url('/invoice/'.$this->invoice->id);
         $url = url('/');
         return (new MailMessage)
-            ->greeting('Hello!')
-            ->line('checkout our recent activity!')
-            ->line($this->post->title)
-            ->action('Read More here', $url)
-            ->line('Thank you for being with us!');
+            ->subject('Booking Confirmation')
+            ->greeting("Hello, {$this->booking->fullname}")
+            ->line("We are delighted to let you know that Your booking is well reserved, Your booking reference is: {$this->booking->booking_reference} You can use the code to edit your booking whenever necessary.")
+            ->line('Thank you for trusting us!, we promise you unforgettable experience.');
     }
 
     /**

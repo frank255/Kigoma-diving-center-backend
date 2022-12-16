@@ -40,6 +40,7 @@ class SubscriberController extends Controller
     public function store(Request $request)
     {
         return Subscriber::create($request->all());
+        
     }
 
     /**

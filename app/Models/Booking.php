@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Notifications\BookingCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 class Booking extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $fillable = ['booking_reference', 'fullname', 'nationality', 'email', 'no_people', 'no_children', 'allergies', 'services', 'start', 'end', 'info'];
 
     public function Service()
@@ -27,6 +30,9 @@ class Booking extends Model
     {
         static::creating(function ($bookings) {
             $bookings->booking_reference = Str::random($length = 6);
+        });
+        static::creating(function (Booking $booking) {
+            Notification::route('mail', [$booking->email => $booking->fullname])->notify(new BookingCreated($booking));
         });
     }
 

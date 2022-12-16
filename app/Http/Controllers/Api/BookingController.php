@@ -7,6 +7,9 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Resources\BookingResource;
+use App\Models\Subscriber;
+use App\Notifications\BookingCreated;
+use App\Notifications\PostCreated;
 use PhpParser\Node\Expr\Cast\Bool_;
 
 class BookingController extends Controller
@@ -90,7 +93,7 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-     return Booking ::destroy($id);
+        return Booking::destroy($id);
     }
 
     public function search($booking_reference)

@@ -2,24 +2,24 @@
 
 namespace App\Notifications;
 
-use App\Models\Post;
+use App\Models\Subscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostCreated extends Notification
+class SubscriptionApproval extends Notification
 {
     use Queueable;
-    private Post $post;
+    private Subscriber $subscriber;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Post $post)
+    public function __construct(Subscriber $subscriber)
     {
-        $this->post = $post;
+        $this->subscriber = $subscriber;
     }
 
     /**
@@ -41,13 +41,9 @@ class PostCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        // $url = url('/invoice/'.$this->invoice->id);
-        $url = url('/');
         return (new MailMessage)
-            ->greeting('Hello!')
-            ->line('checkout our recent activity!')
-            ->line($this->post->title)
-            ->action('Read More here', $url)
+            ->greeting('Hello There,')
+            ->line('We are delighted to have you in our family!, we will be sending you notification whenever we have a recent activity.')
             ->line('Thank you for being with us!');
     }
 

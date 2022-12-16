@@ -6,6 +6,7 @@ use App\Notifications\PostCreated;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Notification;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
@@ -20,11 +21,14 @@ class Post extends Model implements HasMedia
         'is_published' => 'boolean',
         'attachments' => 'array',
     ];
-    // protected static function booted()
-    // {
-    //    $subscriber = Subscriber::first();
-    //    $subscriber->notify(new PostCreated($post));
-    // }
+    protected static function booted()
+    {
+        static::creating(function (Post $post) {
+            //sending to multiple subscribers
+            $subscribers = Subscriber::all();
+            Notification::send($subscribers, (new PostCreated($post)));
+        });
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
