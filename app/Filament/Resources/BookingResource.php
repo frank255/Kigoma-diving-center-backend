@@ -59,6 +59,7 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('booking_reference'),
                 Tables\Columns\TextColumn::make('fullname'),
                 Tables\Columns\TextColumn::make('nationality'),
