@@ -6,7 +6,10 @@ use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers;
 use Filament\Forms\Components\Select;
 use App\Models\Booking;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -25,20 +28,20 @@ class BookingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('fullname')
+                TextInput::make('fullname')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('nationality')
+                TextInput::make('nationality')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('no_people')
+                TextInput::make('no_people')
                     ->required(),
-                Forms\Components\TextInput::make('no_children'),
-                Forms\Components\Textarea::make('allergies')
+                TextInput::make('no_children'),
+                Textarea::make('allergies')
                     ->maxLength(65535),
                 Select::make('services')
                     ->options(Service::all()->pluck('name', 'id'))
@@ -46,11 +49,11 @@ class BookingResource extends Resource
                     ->multiple()
                     ->required()
                     ->disablePlaceholderSelection(),
-                Forms\Components\DatePicker::make('start')
+                DatePicker::make('start')
                     ->required(),
-                Forms\Components\DatePicker::make('end')
+                DatePicker::make('end')
                     ->required(),
-                Forms\Components\TextInput::make('info')
+                TextInput::make('info')
                     ->maxLength(255),
             ]);
     }

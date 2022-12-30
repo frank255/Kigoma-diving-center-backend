@@ -7,6 +7,7 @@ use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -43,7 +44,7 @@ class PostResource extends Resource
                             })->required(),
                         TextInput::make('slug'),
                         SpatieMediaLibraryFileUpload::make('image')->image()->multiple()->minFiles(3),
-                        Forms\Components\Textarea::make('content')
+                      Textarea::make('content')
                             ->required()
                             ->maxLength(65535),
                         Forms\Components\Toggle::make('is_published')
