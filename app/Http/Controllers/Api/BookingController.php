@@ -14,11 +14,7 @@ use PhpParser\Node\Expr\Cast\Bool_;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function index()
     {
         return BookingResource::collection(Booking::latest()->paginate(5));
@@ -28,11 +24,7 @@ class BookingController extends Controller
         // );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
