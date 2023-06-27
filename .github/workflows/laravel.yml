@@ -1,0 +1,24 @@
+on: 
+  push: 
+    branches:
+      - main
+name: 🚀 Deploy website on pushs
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+      
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      env:
+        FTP_SERVER: ${{secrets.ftp_server}}
+        FTP_USERNAME: ${{secrets.ftp_username}}
+        FTP_PASSWORD: ${{secrets.ftp_password}}
+        LOCAL_DIR: ./
+        REMOTE_DIR: ./api.bellicksfinance.com/
+        METHOD: sftp
+        PORT: 22
+        ARGS: --verbose
