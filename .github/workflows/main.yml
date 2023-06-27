@@ -18,7 +18,7 @@ jobs:
         FTP_USERNAME: ${{secrets.ftp_username}}
         FTP_PASSWORD: ${{secrets.ftp_password}}
         LOCAL_DIR: ./
-        REMOTE_DIR: ./api.bellicksfinance.com/
+        REMOTE_DIR: ./api.kigomadivingcenter.com/
         METHOD: sftp
         PORT: 22
         ARGS: --verbose
