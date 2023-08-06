@@ -44,9 +44,9 @@ class BookingCreated extends Notification
         $url = url('/');
         return (new MailMessage)
             ->subject('Booking Confirmation')
-            ->greeting("Hello, {$this->booking->fullname}")
-            ->line("We are delighted to let you know that Your booking is well reserved, Your booking reference is: {$this->booking->booking_reference} You can use the code to edit your booking whenever necessary.")
-            ->line('Thank you for trusting us!, we promise you unforgettable experience.');
+            ->greeting("Dear, {$this->booking->fullname}")
+            ->line("We are delighted that Your booking is well received.Kindly allow us to work on it and our team will shortly contact you back.")
+            ->line('Thank you for putting trusting on us!, wishing you unforgettable experience.');
     }
 
     /**
