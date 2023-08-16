@@ -46,7 +46,9 @@ class BookingCreated extends Notification
             ->subject('Booking Confirmation')
             ->greeting("Dear, {$this->booking->fullname}")
             ->line("We are delighted that Your booking is well received.Kindly allow us to work on it and our team will shortly contact you back.")
-            ->line('Thank you for putting trusting on us, wishing you unforgettable experience.');
+            ->line('Thank you for putting trusting on us, wishing you unforgettable experience.')
+            ->bcc(['resa@kigomadivingcenter.com', 'frankilunga@kigomadivingcenter.com']); // Add the CC email addresses here
+
     }
 
     /**
